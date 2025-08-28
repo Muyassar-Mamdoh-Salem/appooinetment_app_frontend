@@ -1,0 +1,17 @@
+import React from 'react';
+import { input } from "@/components/ui/input";     // ✅ تأكد من صحة المسار
+import { Button } from "@/components/ui/button";   // ✅ أضف هذا السطر لو مش موجود
+
+function CategorySearch() {
+  return (
+    <div className="p-6 bg-white rounded-lg shadow-md space-y-4">
+      <h2 className="font-bold text-3xl text-gray-800">Search Categories</h2>
+      <div className="flex items-center gap-4">
+        <Input type="email" placeholder="Enter your email" className="flex-1" />
+        <Button type="submit">Subscribe</Button>
+      </div>
+    </div>
+  );
+}
+
+export default CategorySearch;
