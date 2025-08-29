@@ -38,6 +38,7 @@ function DoctorDetails({ doctor }) {
           <span>{doctor?.address || "غير محدد"}</span>
         </h2>
 
+<h2>phone: {doctor?.phone || "غير محدد"}</h2>
         <BookAppointment doctor={doctor} />
 
         <div>

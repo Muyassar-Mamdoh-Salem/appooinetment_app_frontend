@@ -1,18 +1,17 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-// مكتبة kinde
+// Kinde
 import {
-  RegisterLink,
   LoginLink,
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
-// مكتبة shadcn
+// shadcn
 import {
   Popover,
   PopoverContent,
@@ -21,31 +20,28 @@ import {
 
 function Header() {
   const menu = [
-    { id: 1, name: 'Home', path: '/' },
-    { id: 2, name: 'Explore', path: 'Explore' },
-    { id: 3, name: 'Contact Us', path: 'Contact Us' }
+    { id: 1, name: "Home", path: "/" },
+    { id: 2, name: "Explore", path: "/explore" },
+    { id: 3, name: "Contact Us", path: "/contact" },
   ];
 
   const { user } = useKindeBrowserClient();
 
-  // التأكد من أن المكون يعمل على العميل فقط
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   return (
-    <header className="bg-white shadow-md px-2 flex items-center justify-between">
-      {/* الشعار والقائمة */}
+    <header className="bg-white dark:bg-gray-900 shadow-md px-2 flex items-center justify-between">
+      {/* Logo & Menu */}
       <div className="flex items-center">
-        {/* الشعار */}
         <div className="flex items-center gap-2">
           <Image src="/assets/image/logo.png" width={100} height={40} alt="logo" />
         </div>
 
-        {/* القائمة */}
         <nav>
-          <ul className="hidden md:flex gap-8 text-gray-700 font-medium">
+          <ul className="hidden md:flex gap-8 text-gray-700 dark:text-gray-300 font-medium">
             {menu.map((item) => (
               <li key={item.id}>
                 <Link
@@ -60,43 +56,50 @@ function Header() {
         </nav>
       </div>
 
-      {/* تسجيل الدخول أو المستخدم */}
+      {/* Auth buttons */}
       {isClient && user ? (
-        user.picture && (
-          <Popover>
-            <PopoverTrigger asChild>
-              <Image
-                src={user.picture}
-                width={40}
-                height={40}
-                alt="user"
-                className="rounded-full cursor-pointer border border-gray-300 hover:scale-105 transition"
-              />
-            </PopoverTrigger>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Image
+              src={user?.picture || "/assets/image/avatar.png"}
+              width={40}
+              height={40}
+              alt={user?.given_name || "user"}
+              className="rounded-full cursor-pointer border border-gray-300 hover:scale-105 transition"
+            />
+          </PopoverTrigger>
 
-            <PopoverContent className="w-44 p-3 rounded-xl shadow-md bg-white flex flex-col space-y-2 text-sm">
-              <ul className="space-y-2">
-                <li>
-                  <LogoutLink>
-                    <span className="block px-3 py-1.5 rounded-md hover:bg-lime-300 hover:text-red-500 transition cursor-pointer">
-                      Logout
-                    </span>
-                  </LogoutLink>
-                </li>
-                <li>
-                  <span className="block px-3 py-1.5 rounded-md hover:bg-lime-300 cursor-pointer">
-                    My Profile
+          <PopoverContent className="w-44 p-3 rounded-xl shadow-md bg-white dark:bg-gray-800 flex flex-col space-y-2 text-sm">
+            <ul className="space-y-2">
+              <li className="px-3 py-1.5 text-gray-700 dark:text-gray-200 font-medium border-b">
+                {user?.given_name || "Guest"}
+              </li>
+              <li>
+                <LogoutLink>
+                  <span className="block px-3 py-1.5 rounded-md hover:bg-lime-300 hover:text-red-500 transition cursor-pointer">
+                    Logout
                   </span>
-                </li>
-                <Link href={"/my-Booking"}>
-                  <span className="block px-3 py-1.5 rounded-md hover:bg-lime-300 cursor-pointer">
-                    My Booking
-                  </span>
+                </LogoutLink>
+              </li>
+              <li>
+                <Link
+                  href="/profile"
+                  className="block px-3 py-1.5 rounded-md hover:bg-lime-300 cursor-pointer"
+                >
+                  My Profile
                 </Link>
-              </ul>
-            </PopoverContent>
-          </Popover>
-        )
+              </li>
+              <li>
+                <Link
+                  href="/my-booking"
+                  className="block px-3 py-1.5 rounded-md hover:bg-lime-300 cursor-pointer"
+                >
+                  My Booking
+                </Link>
+              </li>
+            </ul>
+          </PopoverContent>
+        </Popover>
       ) : (
         <LoginLink>
           <Button className="text-white rounded-lg">Get started</Button>
