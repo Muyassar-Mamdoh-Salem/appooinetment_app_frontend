@@ -1,8 +1,12 @@
 import axios from "axios";
 
-// ✅ نحدد الـ baseURL الافتراضي
-const BASE_URL = "http://localhost:1337/api";
-const FALLBACK_URL = "https://appointments.siliconsquire.com/api";
+// ✅ استخدم متغير البيئة للـ baseURL
+const BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  process.env.PROD_API_URL ||
+  "http://localhost:1337/api";
+const FALLBACK_URL =
+  process.env.PROD_API_URL || "https://appointments.siliconsquire.com/api";
 
 // ✅ إنشاء Axios instance
 const axiosGlobal = axios.create({
@@ -11,8 +15,8 @@ const axiosGlobal = axios.create({
 
 // ✅ Interceptor لتجربة fallback لو حصل error
 axiosGlobal.interceptors.response.use(
-  response => response, // لو response طبيعي، نرجعه
-  async error => {
+  (response) => response, // لو response طبيعي، نرجعه
+  async (error) => {
     // لو السيرفر الأساسي مش شغال
     if (error.code === "ERR_NETWORK" || error.response?.status >= 500) {
       // نعمل request مرة تانية للـ fallback URL
