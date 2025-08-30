@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { toast } from "sonner"
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
@@ -86,19 +86,19 @@ const BookAppointment = ({ doctor }) => {
         </DialogHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-   <Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-  disabled={pastDay}
-  className="rounded-lg border"
-  classNames={{
-    day: "h-10 w-10 text-center rounded-full flex items-center justify-center", // الشكل العام
-    day_selected: "bg-black text-white rounded-full", // ✅ اليوم المختار
-    day_today: "border border-lime-500 font-bold rounded-full", // اليوم الحالي
-    day_disabled: "opacity-50 cursor-not-allowed", // الأيام الماضية
-  }}
-/>
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            disabled={pastDay}
+            className="rounded-lg border"
+            classNames={{
+              day: "h-10 w-10 text-center rounded-full flex items-center justify-center", // الشكل العام
+              day_selected: "bg-black text-white rounded-full", // ✅ اليوم المختار
+              day_today: "border border-lime-500 font-bold rounded-full", // اليوم الحالي
+              day_disabled: "opacity-50 cursor-not-allowed", // الأيام الماضية
+            }}
+          />
 
 
 

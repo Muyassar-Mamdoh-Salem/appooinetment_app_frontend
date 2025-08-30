@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 import Api from "../_utils/Api"
 import Image from "next/image"
 import Link from "next/link"
@@ -73,11 +73,11 @@ function CategorySearch() {
                     alt={name}
                     unoptimized
                     className="h-auto object-contain mx-auto"
-                  
+
                   />
-                  
+
                 )}
-                
+
               </Link>
             )
           })
