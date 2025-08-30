@@ -2,7 +2,7 @@ import axios from "axios";
 
 // ✅ نحدد الـ baseURL الافتراضي
 const BASE_URL = "http://localhost:1337/api";
-const FALLBACK_URL = "http://185.183.182.117:23456/api";
+const FALLBACK_URL = "https://appointments.siliconsquire.com/api";
 
 // ✅ إنشاء Axios instance
 const axiosGlobal = axios.create({
