@@ -1,9 +1,29 @@
 import axios from "axios";
 
-// ✅ نحدد الـ baseURL بتاع Strapi
+// ✅ نحدد الـ baseURL الافتراضي
+const BASE_URL = "http://localhost:1337/api";
+const FALLBACK_URL = "http://185.183.182.117:23456/api";
+
+// ✅ إنشاء Axios instance
 const axiosGlobal = axios.create({
-  baseURL: "http://localhost:1337/api",
+  baseURL: BASE_URL,
 });
+
+// ✅ Interceptor لتجربة fallback لو حصل error
+axiosGlobal.interceptors.response.use(
+  response => response, // لو response طبيعي، نرجعه
+  async error => {
+    // لو السيرفر الأساسي مش شغال
+    if (error.code === "ERR_NETWORK" || error.response?.status >= 500) {
+      // نعمل request مرة تانية للـ fallback URL
+      return axios({
+        ...error.config,
+        baseURL: FALLBACK_URL,
+      });
+    }
+    return Promise.reject(error); // لو مشكلة تانية، نرميها
+  }
+);
 
 /**
  * ✅ نجلب التصنيفات
@@ -46,14 +66,12 @@ const myBookingList = (email) =>
   );
 
 /**
- * ✅ حذف حجز بالـ id (المدعوم رسميًا من Strapi)
+ * ✅ حذف حجز بالـ id
  */
 const deleteBookingById = (id) => axiosGlobal.delete("/appoinetments/" + id);
 
 /**
- * ✅ حذف حجز بالـ documentId (لو عامل Route مخصص في Strapi)
- * 🔥 لازم تكون ضايف Custom Endpoint في Strapi زي:
- * DELETE /appoinetments/document/:documentId
+ * ✅ حذف حجز بالـ documentId
  */
 const deleteBookingByDocumentId = (documentId) =>
   axiosGlobal.delete("/appoinetments/document/" + documentId);
