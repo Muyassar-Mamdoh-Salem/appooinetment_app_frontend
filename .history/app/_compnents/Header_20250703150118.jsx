@@ -16,7 +16,7 @@ function Header() {
         {/* الشعار */}
         <div className="flex items-center gap-2">
           <Image src="/assets/image/logo.png" width={100} height={40} alt="logo" />
-         
+
         </div>
 
         {/* القائمة */}
