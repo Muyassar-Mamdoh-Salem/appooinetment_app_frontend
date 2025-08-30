@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/Button"
 import { Calendar } from "@/components/ui/calendar"
 import { toast } from "sonner"
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"

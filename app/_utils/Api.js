@@ -1,36 +1,61 @@
 import axios from "axios";
 
+// ✅ نحدد الـ baseURL بتاع Strapi
 const axiosGlobal = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL + "/api"
+  baseURL: "http://localhost:1337/api",
 });
 
-export const getCategory = () =>
+/**
+ * ✅ نجلب التصنيفات
+ */
+const getCategory = () =>
   axiosGlobal.get("/categories?fields[0]=name&populate[icon][fields][0]=url");
 
-export const getDoctors = () => axiosGlobal.get("/doctors?populate=*");
+/**
+ * ✅ نجلب كل الأطباء
+ */
+const getDoctors = () => axiosGlobal.get("/doctors?populate=*");
 
-export const getDoctorsByCategory = (category) =>
+/**
+ * ✅ نجلب الأطباء حسب التصنيف
+ */
+const getDoctorsByCategory = (category) =>
   axiosGlobal.get(
     "/doctors?populate=*&filters[category][name][$contains]=" + category
   );
 
-export const getDoctorById = (documentId) =>
+/**
+ * ✅ نجلب دكتور معين بالـ ID
+ */
+const getDoctorById = (documentId) =>
   axiosGlobal.get("/doctors/" + documentId + "?populate=*");
 
-export const bookAppointment = (data) =>
-  axiosGlobal.post("/appoinetments", { data });
+/**
+ * ✅ إضافة حجز
+ */
+const bookAppointment = (data) => axiosGlobal.post("/appoinetments", { data });
 
-export const myBookingList = (email) =>
+/**
+ * ✅ عرض الحجوزات الخاصة بمستخدم معين عبر الإيميل
+ */
+const myBookingList = (email) =>
   axiosGlobal.get(
     "/appoinetments?filters[email][$eq]=" +
       email +
       "&populate[doctor][populate]=image"
   );
 
-export const deleteBookingById = (id) =>
-  axiosGlobal.delete("/appoinetments/" + id);
+/**
+ * ✅ حذف حجز بالـ id (المدعوم رسميًا من Strapi)
+ */
+const deleteBookingById = (id) => axiosGlobal.delete("/appoinetments/" + id);
 
-export const deleteBookingByDocumentId = (documentId) =>
+/**
+ * ✅ حذف حجز بالـ documentId (لو عامل Route مخصص في Strapi)
+ * 🔥 لازم تكون ضايف Custom Endpoint في Strapi زي:
+ * DELETE /appoinetments/document/:documentId
+ */
+const deleteBookingByDocumentId = (documentId) =>
   axiosGlobal.delete("/appoinetments/document/" + documentId);
 
 export default {
@@ -41,5 +66,5 @@ export default {
   bookAppointment,
   myBookingList,
   deleteBookingById,
-  deleteBookingByDocumentId
+  deleteBookingByDocumentId,
 };
