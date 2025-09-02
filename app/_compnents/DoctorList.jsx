@@ -32,7 +32,7 @@ function DoctorList({ doctorsList = [], hidden = "Popular Doctors", isLoading })
                 {doctor?.image?.[0]?.url && (
                   <div className="relative w-full h-[200px]">
                     <Image
-                      src={`http://localhost:1337${doctor.image[0].url}`}
+                      src={`https://appointments.siliconsquire.com${doctor.image[0].url}`}
                       alt={doctor.name || "Doctor"}
                       fill
                       className="object-contain rounded-md"

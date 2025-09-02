@@ -67,7 +67,7 @@ function CategorySearch() {
                 <p className="m-2 text-gray-800">{name}</p>
                 {iconUrl && (
                   <Image
-                    src={iconUrl.startsWith("http") ? iconUrl : `http://localhost:1337${iconUrl}`}
+                    src={iconUrl.startsWith("http") ? iconUrl : `https://appointments.siliconsquire.com${iconUrl}`}
                     width={150}
                     height={150}
                     alt={name}

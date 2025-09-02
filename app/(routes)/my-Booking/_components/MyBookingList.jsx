@@ -21,7 +21,7 @@ function MyBookingList({ bookingList: initialList, past }) {
         const doctor = item?.doctor
 
         const imageUrl = doctor?.image?.[0]?.url
-          ? `http://localhost:1337${doctor.image[0].url}`
+          ? `https://appointments.siliconsquire.com${doctor.image[0].url}`
           : "/fallback.png"
 
         return (

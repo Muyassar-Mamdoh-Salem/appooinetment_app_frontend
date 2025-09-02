@@ -33,7 +33,7 @@ function Doctoruggestions() {
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 ">
         {doctorList.slice(0, 5).map((doctor) => {
           const imageUrl = doctor?.image?.[0]?.url
-            ? `http://localhost:1337${doctor.image[0].url}`
+            ? `https://appointments.siliconsquire.com${doctor.image[0].url}`
             : "/fallback.png";
 
           return (
