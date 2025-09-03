@@ -80,49 +80,48 @@ const BookAppointment = ({ doctor }) => {
         <Button className="text-white rounded-full">Book Appointment</Button>
       </DialogTrigger>
 
-      <DialogContent className=" grid  sm:grid-cols-1">
-        <DialogHeader>
-          <DialogTitle>Book Appointment</DialogTitle>
-        </DialogHeader>
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg p-4">
+  <DialogHeader>
+    <DialogTitle>Book Appointment</DialogTitle>
+  </DialogHeader>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            disabled={pastDay}
-            className="rounded-lg border"
-            classNames={{
-              day: "h-10 w-10 text-center rounded-full flex items-center justify-center", // الشكل العام
-              day_selected: "bg-black text-white rounded-full", // ✅ اليوم المختار
-              day_today: "border border-lime-500 font-bold rounded-full", // اليوم الحالي
-              day_disabled: "opacity-50 cursor-not-allowed", // الأيام الماضية
-            }}
-          />
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      disabled={pastDay}
+      className="rounded-lg border"
+      classNames={{
+        day: "h-10 w-10 text-center rounded-full flex items-center justify-center",
+        day_selected: "bg-black text-white rounded-full",
+        day_today: "border border-lime-500 font-bold rounded-full",
+        day_disabled: "opacity-50 cursor-not-allowed",
+      }}
+    />
 
+    <div className="grid grid-cols-3 gap-2">
+      {timeSlot.map((item) => (
+        <button
+          key={item.time}
+          onClick={() => setSelectedTime(item.time)}
+          className={`border p-3 rounded-full text-center cursor-pointer transition-colors duration-300 ease-in-out hover:bg-lime-600 hover:text-white hover:shadow-md 
+          ${item.time === selectedTime ? "bg-lime-300 text-black" : ""}`}
+        >
+          {item.time}
+        </button>
+      ))}
+    </div>
+  </div>
 
+  {/* ✅ زرار الحجز ثابت على الموبايل */}
+  <div className="mt-6 flex justify-center sm:static sm:mt-6 sticky bottom-0 bg-white p-2">
+    <Button onClick={booking} disabled={!date || !selectedTime}>
+      Book Appointment
+    </Button>
+  </div>
+</DialogContent>
 
-          <div className="grid grid-cols-3 gap-2">
-            {timeSlot.map((item) => (
-              <button
-                key={item.time}
-                onClick={() => setSelectedTime(item.time)}
-                className={`border p-3 rounded-full text-center cursor-pointer transition-colors duration-300 ease-in-out hover:bg-lime-600 hover:text-white hover:shadow-md 
-                ${item.time === selectedTime ? "bg-lime-300 text-black" : ""}`}
-              >
-                {item.time}
-              </button>
-            ))}
-          </div>
-             <div className="mt-6 flex ">
-          <Button onClick={booking} disabled={!date || !selectedTime}>
-            Book Appointment
-          </Button>
-        </div>
-        </div>
-
-     
-      </DialogContent>
     </Dialog>
   )
 }
