@@ -114,13 +114,14 @@ const BookAppointment = ({ doctor }) => {
               </button>
             ))}
           </div>
-        </div>
-
-        <div className="mt-6 flex ">
+             <div className="mt-6 flex ">
           <Button onClick={booking} disabled={!date || !selectedTime}>
             Book Appointment
           </Button>
         </div>
+        </div>
+
+     
       </DialogContent>
     </Dialog>
   )
