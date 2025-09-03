@@ -80,7 +80,7 @@ const BookAppointment = ({ doctor }) => {
         <Button className="text-white rounded-full">Book Appointment</Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-3xl h-full">
+      <DialogContent className=" grid  sm:grid-cols-1">
         <DialogHeader>
           <DialogTitle>Book Appointment</DialogTitle>
         </DialogHeader>
@@ -116,7 +116,7 @@ const BookAppointment = ({ doctor }) => {
           </div>
         </div>
 
-        <div className="mt-6 flex justify-end">
+        <div className="mt-6 flex ">
           <Button onClick={booking} disabled={!date || !selectedTime}>
             Book Appointment
           </Button>
