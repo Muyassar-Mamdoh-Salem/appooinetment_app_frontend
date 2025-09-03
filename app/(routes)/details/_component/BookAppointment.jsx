@@ -80,7 +80,7 @@ const BookAppointment = ({ doctor }) => {
         <Button className="text-white rounded-full">Book Appointment</Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="sm:max-w-3xl h-full">
         <DialogHeader>
           <DialogTitle>Book Appointment</DialogTitle>
         </DialogHeader>
