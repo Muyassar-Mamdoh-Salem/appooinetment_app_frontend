@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import {
   LoginLink,
   LogoutLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
+} 
+from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 // shadcn
@@ -75,7 +76,7 @@ function Header() {
                 {user?.given_name || "Guest"}
               </li>
               <li>
-                <LogoutLink>
+                <LogoutLink postLogoutRedirectURL="/">
                   <span className="block px-3 py-1.5 rounded-md hover:bg-lime-300 hover:text-red-500 transition cursor-pointer">
                     Logout
                   </span>
@@ -91,7 +92,7 @@ function Header() {
               </li>
               <li>
                 <Link
-                  href="/my-booking"
+                  href="/my-Booking"
                   className="block px-3 py-1.5 rounded-md hover:bg-lime-300 cursor-pointer"
                 >
                   My Booking
@@ -101,8 +102,8 @@ function Header() {
           </PopoverContent>
         </Popover>
       ) : (
-        <LoginLink>
-          <Button className="text-white rounded-lg">Get started</Button>
+        <LoginLink postLoginRedirectURL="/">
+          <Button  className="text-white rounded-lg">Get started</Button>
         </LoginLink>
       )}
     </header>
